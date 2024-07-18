@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour
     [Header("Dashing")]
     [SerializeField] private float dashingPower = 24f;
     [SerializeField] private float dashingTime = 0.2f;
-    private bool canDash = true;
+    [SerializeField] private static bool canDash = true;
     private bool isDashing;
 
 
@@ -79,6 +79,7 @@ public class Movement : MonoBehaviour
         {
             isGrouded = true;
             canDash = true;
+            Debug.Log("82");
         }
         
     }
@@ -96,15 +97,23 @@ public class Movement : MonoBehaviour
 
     private IEnumerator Dash(){
         canDash = false;
+        Debug.Log("100");
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
+        isGrouded = false;
         Vector2 dashDirection = new Vector2(horizontal, vertical).normalized;
         rb.velocity = dashDirection * dashingPower;
         yield return new WaitForSeconds(dashingTime);
         rb.gravityScale = originalGravity;
         isDashing = false;
-        if(isGrouded)
+        if(isGrouded){
             canDash = true;
+            Debug.Log("110");
+        }
+    }
+
+    public static void setCanDash(bool dash){
+        canDash = dash;
     }
 }
