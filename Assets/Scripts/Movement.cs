@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour
     [Header("Dashing")]
     [SerializeField] private float dashingPower = 24f;
     [SerializeField] private float dashingTime = 0.2f;
-    [SerializeField] private static bool canDash = true;
+    private static bool canDash = true;
     private bool isDashing;
 
 
