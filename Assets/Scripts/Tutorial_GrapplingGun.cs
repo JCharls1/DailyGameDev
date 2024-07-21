@@ -49,6 +49,7 @@ public class Tutorial_GrapplingGun : MonoBehaviour
     [HideInInspector] public Vector2 grappleDistanceVector;
 
     [SerializeField] private GameObject targetObject;
+    Vector2 Mouse_FirePoint_DistanceVector;
 
     private void Start()
     {
@@ -60,12 +61,14 @@ public class Tutorial_GrapplingGun : MonoBehaviour
     private void Update()
     {
         Movement script = targetObject.GetComponent<Movement>();
-
+        Mouse_FirePoint_DistanceVector = m_camera.ScreenToWorldPoint(Input.mousePosition) - gunPivot.position;
+        if(grappleRope.enabled){
+            script.enabled = false;
+        }
+        
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             SetGrapplePoint();
-            script.enabled = false;
-            Debug.Log("ScriptToDisable has been disabled.");
         }
         else if (Input.GetKey(KeyCode.Mouse0))
         {
@@ -94,8 +97,6 @@ public class Tutorial_GrapplingGun : MonoBehaviour
             grappleRope.enabled = false;
             m_springJoint2D.enabled = false;
             m_rigidbody.gravityScale = 15;
-            script.enabled = true;
-            Debug.Log("ScriptToDisable has been enabled.");
         }
         else
         {

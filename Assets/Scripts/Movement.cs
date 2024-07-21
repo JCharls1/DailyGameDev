@@ -15,13 +15,13 @@ public class Movement : MonoBehaviour
     float horizontal;
     float vertical;
     Rigidbody2D rb;
-    private bool isGrouded;
+    public static bool isGrouded;
     private bool isFacingRight = true;
 
     [Header("Dashing")]
     [SerializeField] private float dashingPower = 24f;
     [SerializeField] private float dashingTime = 0.2f;
-    private static bool canDash = true;
+    public static bool canDash = true;
     private bool isDashing;
 
 
@@ -73,25 +73,54 @@ public class Movement : MonoBehaviour
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if(col.gameObject.tag == "Floor")
-        {
-            isGrouded = true;
-            canDash = true;
-            Debug.Log("82");
-        }
+    // void OnCollisionEnter2D(Collision2D col)
+    // {
+    //     if(col.gameObject.tag == "Floor")
+    //     {
+    //         isGrouded = true;
+    //         canDash = true;
+    //         Debug.Log("82");
+    //     }
         
-    }
+    // }
+
+    // private void Flip()
+    // {
+    //     if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+    //     {
+    //         Vector3 localScale = transform.localScale;
+    //         isFacingRight = !isFacingRight;
+    //         localScale.x *= -1f;
+    //         transform.localScale = localScale;
+    //     }
+    // }
 
     private void Flip()
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
+            // Detach children
+            List<Transform> children = new List<Transform>();
+            foreach (Transform child in transform)
+            {
+                children.Add(child);
+            }
+            foreach (Transform child in children)
+            {
+                child.SetParent(null);
+            }
+
+            // Flip the parent GameObject
             Vector3 localScale = transform.localScale;
             isFacingRight = !isFacingRight;
             localScale.x *= -1f;
             transform.localScale = localScale;
+
+            // Reattach children
+            foreach (Transform child in children)
+            {
+                child.SetParent(transform);
+            }
         }
     }
 
