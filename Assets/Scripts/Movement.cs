@@ -84,14 +84,43 @@ public class Movement : MonoBehaviour
         
     }
 
+    // private void Flip()
+    // {
+    //     if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+    //     {
+    //         Vector3 localScale = transform.localScale;
+    //         isFacingRight = !isFacingRight;
+    //         localScale.x *= -1f;
+    //         transform.localScale = localScale;
+    //     }
+    // }
+
     private void Flip()
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
+            // Detach children
+            List<Transform> children = new List<Transform>();
+            foreach (Transform child in transform)
+            {
+                children.Add(child);
+            }
+            foreach (Transform child in children)
+            {
+                child.SetParent(null);
+            }
+
+            // Flip the parent GameObject
             Vector3 localScale = transform.localScale;
             isFacingRight = !isFacingRight;
             localScale.x *= -1f;
             transform.localScale = localScale;
+
+            // Reattach children
+            foreach (Transform child in children)
+            {
+                child.SetParent(transform);
+            }
         }
     }
 
