@@ -106,6 +106,17 @@ public class Movement : MonoBehaviour
     //     }
     // }
 
+    // private void Flip()
+    // {
+    //     if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+    //     {
+    //         Vector3 localScale = transform.localScale;
+    //         isFacingRight = !isFacingRight;
+    //         localScale.x *= -1f;
+    //         transform.localScale = localScale;
+    //     }
+    // }
+
     private void Flip()
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
@@ -134,7 +145,6 @@ public class Movement : MonoBehaviour
             }
         }
     }
-
     private IEnumerator Dash(){
         canDash = false;
         Debug.Log("100");
