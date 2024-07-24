@@ -64,6 +64,8 @@ public class Tutorial_GrapplingGun : MonoBehaviour
         Mouse_FirePoint_DistanceVector = m_camera.ScreenToWorldPoint(Input.mousePosition) - gunPivot.position;
         if(grappleRope.enabled){
             script.enabled = false;
+        }else{
+            script.enabled = true;
         }
         
         if (Input.GetKeyDown(KeyCode.Mouse0))
