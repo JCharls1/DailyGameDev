@@ -7,14 +7,14 @@ public class RoomManager : MonoBehaviour
     public GameObject VirtualCam;
 
     private void OnTriggerEnter2D(Collider2D col){
-        if(col.CompareTag("Player") && !col.isTrigger){
+        if(col.tag == "Player" && !col.isTrigger){
             Debug.Log("Enter");
             VirtualCam.SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D col){
-        if(col.CompareTag("Player") && !col.isTrigger){
+        if(col.tag == "Player" && !col.isTrigger){
             VirtualCam.SetActive(false);
         }
     }

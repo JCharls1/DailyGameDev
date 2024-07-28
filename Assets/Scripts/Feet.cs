@@ -24,11 +24,8 @@ public class Feet : MonoBehaviour
         // Check if the other GameObject's layer matches the target layer
         if (other.gameObject.layer == targetLayer)
         {
-            // Add your logic here for when the target layer enters the trigger
-            Debug.Log("Target layer entered the trigger: " + other.gameObject.name);
             
             script.enabled = true;
-            Debug.Log("ScriptToDisable has been enabled.");
             Movement.isGrouded = true;
             Movement.canDash = true;
         }
