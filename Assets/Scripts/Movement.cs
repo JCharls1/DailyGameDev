@@ -147,7 +147,6 @@ public class Movement : MonoBehaviour
     }
     private IEnumerator Dash(){
         canDash = false;
-        Debug.Log("100");
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
@@ -159,7 +158,6 @@ public class Movement : MonoBehaviour
         isDashing = false;
         if(isGrouded){
             canDash = true;
-            Debug.Log("110");
         }
     }
 
